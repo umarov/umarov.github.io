@@ -1,0 +1,7 @@
+{
+  "name": "umarov-github-io",
+  "short_name": "umarov-github-io",
+  "description": "Muzafar Umarov&#39;s github page",
+  "start_url": "/",
+  "display": "standalone"
+}

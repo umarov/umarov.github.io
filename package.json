@@ -1,0 +1,26 @@
+{
+  "name": "umarov.github.io",
+  "version": "1.0.0",
+  "description": "Muzafar Umarov&#39;s github page",
+  "main": "index.html",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "polymer test",
+    "clean-docs": "rm -rf docs",
+    "build": "polymer build --preset es6-unbundled",
+    "release": "npm run clean-docs && npm run build && cp -r build/es6-unbundled/ docs/ && cp manifest.json docs/manifest.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umarov/umarov.github.io.git"
+  },
+  "author": "Muzafar Umarov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/umarov/umarov.github.io/issues"
+  },
+  "homepage": "https://github.com/umarov/umarov.github.io#readme"
+}
