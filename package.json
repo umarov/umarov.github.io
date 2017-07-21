@@ -13,8 +13,8 @@
     "test": "polymer test",
     "test:integration": "polymer build # test that psk builds without error with the CLI",
     "clean-docs": "rm -rf docs",
-    "build": "polymer build --preset es6-unbundled",
-    "release": "npm run clean-docs && npm run build && cp -r build/es6-unbundled/ docs/ && cp manifest.json docs/manifest.json"
+    "build": "polymer build --preset es6-bundled",
+    "release": "npm run clean-docs && npm run build && cp -r build/es6-bundled/ docs/ && cp manifest.json docs/manifest.json"
   },
   "repository": {
     "type": "git",
