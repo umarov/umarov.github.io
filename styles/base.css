@@ -1,0 +1,21 @@
+:root {
+  --mdc-theme-primary: #f98b00;
+  --mdc-theme-primary-light: #ffbc45;
+  --mdc-theme-primary-dark: #c05d00;
+  --mdc-theme-secondary: #90caf9;
+  --mdc-theme-secondary-light: #c3fdff;
+  --mdc-theme-secondary-dark: #5d99c6;
+  --mdc-theme-background: #fff;
+}
+
+.repo-item {
+  justify-content: space-between;
+}
+
+.mdc-toolbar {
+  padding-left: 16px;
+}
+
+main {
+  padding: 8px;
+}
