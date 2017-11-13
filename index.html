@@ -1,77 +1,59 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html class="mdc-typography">
   <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Umarov Github Page">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
-
-    <title>Umarov Github Page</title>
-    <meta name="description" content="Umarov Github Page">
-
-    <base href="/">
-
-    <link rel="icon" href="images/favicon.ico">
-
-    <!-- See https://goo.gl/OOhYW5 -->
-    <link rel="manifest" href="manifest.json">
-
-    <!-- See https://goo.gl/qRE0vM -->
-    <meta name="theme-color" content="#3f51b5">
-
-    <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="My App">
-
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="My App">
-
-    <!-- Homescreen icons -->
-    <link rel="apple-touch-icon" href="images/manifest/icon-48x48.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/manifest/icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="96x96" href="images/manifest/icon-96x96.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="images/manifest/icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="images/manifest/icon-192x192.png">
-
-    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png">
-    <meta name="msapplication-TileColor" content="#3f51b5">
-    <meta name="msapplication-tap-highlight" content="no">
-
-    <script>
-      // Register the base URL
-      const baseUrl = document.querySelector('base').href;
-
-      // Load and register pre-caching Service Worker
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register(baseUrl + 'service-worker.js');
-        });
-      }
-    </script>
-
-    <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
-    <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-
-    <!-- Load your application shell -->
-    <link rel="import" href="src/my-app.html">
-
-    <!-- Add any global styles for body, document, etc. -->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Greeting App</title>
+    <link rel="stylesheet" href="./styles/bootstrap-reboot.min.css">
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
     <style>
-      body {
-        margin: 0;
-        font-family: 'Roboto', 'Noto', sans-serif;
-        line-height: 1.5;
-        min-height: 100vh;
-        background-color: #eeeeee;
+      :root {
+        --mdc-theme-primary: #f98b00;
+        --mdc-theme-primary-light: #ffbc45;
+        --mdc-theme-primary-dark: #c05d00;
+        --mdc-theme-secondary: #90caf9;
+        --mdc-theme-secondary-light: #c3fdff;
+        --mdc-theme-secondary-dark: #5d99c6;
+        --mdc-theme-background: #fff;
+      }
+
+      .repo-item {
+        justify-content: space-between;
+      }
+
+      .mdc-toolbar {
+        padding-left: 16px;
+      }
+
+      main {
+        padding: 8px;
       }
     </style>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
   </head>
-  <body>
-    <my-app></my-app>
-    <noscript>
-      Please enable JavaScript to view this website.
-    </noscript>
+  <body class="mdc-typography">
+    <header class="mdc-toolbar">
+      <div class="mdc-toolbar__row">
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+          Muzafar Umarov's Github page
+        </section>
+      </div>
+    </header>
+    <main>
+      <h2>Github repos</h2>
+      <nav class="mdc-list" id="github-repos">
+      </nav>
+    </main>
+
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script src="./dist/script.bundle.js"></script>
+    <script>
+
+      window.mdc.autoInit();
+
+    </script>
   </body>
 </html>
