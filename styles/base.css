@@ -19,3 +19,39 @@
 main {
   padding: 8px;
 }
+
+.mdc-grid-list .mdc-grid-tile__primary {
+  padding-bottom: 120%;
+}
+
+.mdc-grid-tile__primary-content {
+  height: auto;
+}
+
+.mdc-grid-tile {
+  --mdc-grid-list-tile-width: 50%;
+}
+
+@media (min-width: 450px) {
+  .mdc-grid-tile {
+    --mdc-grid-list-tile-width: 33.33%;
+  }
+}
+
+@media (min-width: 770px) {
+  .mdc-grid-tile {
+    --mdc-grid-list-tile-width: 25%;
+  }
+}
+
+@media (min-width: 1030px) {
+  .mdc-grid-tile {
+    --mdc-grid-list-tile-width: 20%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .mdc-grid-tile {
+    --mdc-grid-list-tile-width: 10%;
+  }
+}
