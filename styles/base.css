@@ -8,6 +8,29 @@
   --mdc-theme-background: #fff;
 }
 
+.repos.hidden, .profile.hidden {
+  display: none;
+}
+
+a.mdc-tab {
+  text-decoration: none;
+}
+
+img.mdc-card__media-item.mdc-card__media-item {
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+.profile {
+  display: flex;
+  justify-content: center;
+}
+
+.mdc-card.user-profile {
+  max-width: 550px;
+}
+
 .repo-item {
   justify-content: space-between;
 }

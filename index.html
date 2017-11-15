@@ -16,12 +16,23 @@
           Muzafar Umarov's Github page
         </section>
       </div>
+
+      <nav id="basic-tab-bar" class="mdc-tab-bar">
+        <a class="mdc-tab" data-state-name="profile" href="#profile">Profile</a>
+        <a class="mdc-tab" data-state-name="repos" href="#repos">Repos</a>
+        <span class="mdc-tab-bar__indicator"></span>
+      </nav>
     </header>
     <main>
-      <h2>Github repos</h2>
-      <div class="mdc-grid-list">
-        <ul class="mdc-grid-list__tiles" id="github-repos">
-        </ul>
+      <div class="profile hidden" id="profile">
+      </div>
+
+      <div class="repos hidden">
+        <h2>Github repos</h2>
+        <div class="mdc-grid-list">
+          <ul class="mdc-grid-list__tiles" id="github-repos">
+          </ul>
+        </div>
       </div>
     </main>
 

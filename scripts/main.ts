@@ -1,9 +1,13 @@
-import "@material/grid-list/dist/mdc.grid-list.min.css";
-import "@material/toolbar/dist/mdc.toolbar.min.css";
-import { html, render } from "lit-html";
+import '@material/button/dist/mdc.button.min.css';
+import '@material/card/dist/mdc.card.min.css';
+import '@material/grid-list/dist/mdc.grid-list.min.css';
+import '@material/tabs/dist/mdc.tabs.min.css';
+import '@material/toolbar/dist/mdc.toolbar.min.css';
+import { html, render } from 'lit-html';
 
-import { Repo } from "./types/repo.type";
-const USER_NAME = "umarov";
+import { Repo } from './types/repo.type';
+import { User } from './types/user.type';
+const USER_NAME = 'umarov';
 const REPOS_URL = `https://api.github.com/users/${USER_NAME}/repos`;
 const USER_URL = `https://api.github.com/users/${USER_NAME}`;
 
@@ -36,24 +40,117 @@ function buildReposTemplate(repos: Repo[]) {
   return html`${repos.map(getRepoTemplate)}`;
 }
 
-async function getData() {
-  const [ repos ] = await Promise.all([getRepos(), getUser()]);
-  const reposElement = document.querySelector("#github-repos") as Element;
+function setUpRepos(repos: Repo[]) {
+  const reposElement = document.querySelector('#github-repos') as Element;
 
   requestAnimationFrame(() => {
     render(buildReposTemplate(repos), reposElement);
-    Array.from(document.querySelectorAll(".mdc-grid-tile")).map((tile: Element) => {
-      tile.addEventListener("click", (event: any) => {
-        window.open(event.target.parentElement.parentElement.getAttribute("data-repo-url"), "_blank");
+    Array.from(
+      document.querySelectorAll('.mdc-grid-tile')
+    ).map((tile: Element) => {
+      tile.addEventListener('click', (event: any) => {
+        window.open(
+          event.target.parentElement.parentElement.getAttribute(
+            'data-repo-url'
+          ),
+          '_blank'
+        );
       });
 
       window.onbeforeunload = () => {
-        tile.removeEventListener("click", (event: any) => {
-          window.open(event.target.parentElement.parentElement.getAttribute("data-repo-url"), "_blank");
+        tile.removeEventListener('click', (event: any) => {
+          window.open(
+            event.target.parentElement.parentElement.getAttribute(
+              'data-repo-url'
+            ),
+            '_blank'
+          );
         });
       };
     });
   });
 }
 
-getData();
+function setUpUser(user: User) {
+  const profileElement = document.querySelector('#profile') as Element;
+  render(html`
+  <div class="mdc-card user-profile">
+    <img class="mdc-card__media-item mdc-card__media-item" src="${user.avatar_url}">
+    <section class="mdc-card__primary">
+      <h1 class="mdc-card__title mdc-card__title--large">${user.name}</h1>
+      <h2 class="mdc-card__title">${user.company}, ${user.location}</h2>
+      <p class="mdc-card__subtitle">since ${(new Date(user.created_at)).getFullYear()}</p>
+    </section>
+    <section class="mdc-card__supporting-text">
+      ${user.bio}
+    </section>
+    <section class="mdc-card__actions">
+      <button
+        class="mdc-button mdc-button--compact mdc-card__action"
+        onclick="window.open('${user.html_url}', '_blank');">Go to github.com profile</button>
+    </section>
+  </div>
+  `, profileElement);
+}
+
+async function getData() {
+  return Promise.all([getRepos(), getUser()]);
+}
+
+function setUpTabClickListeners() {
+  const tabs = document.querySelector('#basic-tab-bar');
+  const activeClass = 'mdc-tab--active';
+  const stateAttribute = 'data-state-name';
+
+  if (tabs) {
+    const children = Array.from(tabs.children).filter(child =>
+      child.classList.contains('mdc-tab')
+    );
+
+    tabs.addEventListener('click', (event: any) => {
+      const unselectedTab = children.find(child => child !== event.target);
+      event.target.classList.add(activeClass);
+      document.querySelector(
+        `.${event.target.getAttribute(stateAttribute)}`
+      )!.classList.remove('hidden');
+
+      if (unselectedTab) {
+        unselectedTab.classList.remove(activeClass);
+        const unselectedState = unselectedTab.getAttribute(stateAttribute);
+        if (unselectedState) {
+          document.querySelector(`.${unselectedState}`)!.classList.add(
+            'hidden'
+          );
+        }
+      }
+    });
+  }
+}
+
+setUpTabClickListeners();
+getData()
+  .then(([repos, user]) => {
+    setUpUser(user);
+    setUpRepos(repos);
+  });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const defaultState = 'profile';
+
+  const urlState = window.location.hash.substring(1);
+  const stateName = urlState.length > 0 ? urlState : defaultState;
+
+  const stateElement = document.querySelector(`.${stateName}`);
+
+  if (stateElement) {
+    stateElement.classList.remove('hidden');
+  }
+
+  const tabToActivate = Array.from(document.querySelectorAll('.mdc-tab')).find(
+    tab => tab.getAttribute('data-state-name') === stateName
+  );
+
+  if (tabToActivate) {
+    tabToActivate.classList.add('mdc-tab--active');
+  }
+});
