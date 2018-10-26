@@ -1,8 +1,9 @@
-import '@material/button/dist/mdc.button.min.css';
-import '@material/card/dist/mdc.card.min.css';
-import '@material/grid-list/dist/mdc.grid-list.min.css';
-import '@material/tabs/dist/mdc.tabs.min.css';
-import '@material/toolbar/dist/mdc.toolbar.min.css';
+import '../node_modules/@material/button/dist/mdc.button.min.css';
+import '../node_modules/@material/card/dist/mdc.card.min.css';
+import '../node_modules/@material/grid-list/dist/mdc.grid-list.min.css';
+import '../node_modules/@material/tabs/dist/mdc.tabs.min.css';
+import '../node_modules/@material/toolbar/dist/mdc.toolbar.min.css';
+
 import { html, render } from 'lit-html';
 
 import { Repo } from './types/repo.type';
