@@ -1,38 +1,87 @@
 <!DOCTYPE html>
 <html class="mdc-typography">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Greeting App</title>
-    <link rel="stylesheet" href="./styles/bootstrap-reboot.min.css">
-    <link rel="stylesheet" href="./dist/styles.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/base.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Muzafar Umarov's Github Page</title>
+    <link rel="stylesheet" href="./dist/main.css" />
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles/base.css" />
   </head>
   <body class="mdc-typography">
-    <header class="mdc-toolbar">
-      <div class="mdc-toolbar__row">
-        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-          Muzafar Umarov's Github page
+    <header class="mdc-top-app-bar" style="position: relative;">
+      <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <span class="mdc-top-app-bar__title">Muzafar Umarov's Github page</span>
         </section>
       </div>
-
-      <nav id="basic-tab-bar" class="mdc-tab-bar">
-        <a class="mdc-tab" data-state-name="profile" href="#profile">Profile</a>
-        <a class="mdc-tab" data-state-name="repos" href="#repos">Repos</a>
-        <span class="mdc-tab-bar__indicator"></span>
-      </nav>
     </header>
-    <main>
-      <div class="profile hidden" id="profile">
+    <div class="mdc-top-app-bar__row">
+      <div class="mdc-tab-bar" role="tablist">
+        <div class="mdc-tab-scroller">
+          <div class="mdc-tab-scroller__scroll-area">
+            <div class="mdc-tab-scroller__scroll-content">
+              <button
+                class="mdc-tab mdc-tab--active"
+                role="tab"
+                aria-selected="true"
+                tabindex="0"
+                data-state-name="profile"
+                href="#profile"
+              >
+                <span class="mdc-tab__content">
+                  <span class="mdc-tab__text-label">Profile</span>
+                </span>
+                <span class="mdc-tab-indicator">
+                  <span
+                    class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"
+                  ></span>
+                </span>
+                <span class="mdc-tab__ripple"></span>
+              </button>
+
+              <button
+                class="mdc-tab"
+                role="tab"
+                aria-selected="false"
+                tabindex="1"
+                data-state-name="repos"
+                href="#repos"
+              >
+                <span class="mdc-tab__content">
+                  <span class="mdc-tab__text-label">Repos</span>
+                </span>
+                <span class="mdc-tab-indicator">
+                  <span
+                    class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"
+                  ></span>
+                </span>
+                <span class="mdc-tab__ripple"></span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+    <!--
+      <header class="mdc-top-app-bar" >
+        <div class="mdc-top-app-bar__row">
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <span class="mdc-top-app-bar__title">Muzafar Umarov's Github page</span>
+          </section>
+        </div>
+
+
+      </header>
+    -->
+
+    <main>
+      <div class="profile hidden" id="profile"></div>
 
       <div class="repos hidden">
         <h2>Github repos</h2>
-        <div class="mdc-grid-list">
-          <ul class="mdc-grid-list__tiles" id="github-repos">
-          </ul>
-        </div>
+        <div class="mdc-grid-list"><ul class="mdc-grid-list__tiles" id="github-repos"></ul></div>
       </div>
     </main>
 

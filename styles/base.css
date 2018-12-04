@@ -6,6 +6,12 @@
   --mdc-theme-secondary-light: #c3fdff;
   --mdc-theme-secondary-dark: #5d99c6;
   --mdc-theme-background: #fff;
+
+  font-family: 'Noto Sans', sans-serif;
+}
+
+section.user-card {
+  padding: 1rem;
 }
 
 .repos.hidden, .profile.hidden {
