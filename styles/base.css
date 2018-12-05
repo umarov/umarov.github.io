@@ -49,6 +49,10 @@ main {
   padding: 8px;
 }
 
+#github-repos {
+  justify-content: space-around;
+}
+
 .mdc-grid-list .mdc-grid-tile__primary {
   padding-bottom: 120%;
 }
@@ -58,29 +62,47 @@ main {
 }
 
 .mdc-grid-tile {
-  --mdc-grid-list-tile-width: 50%;
+  cursor: pointer;
+  overflow-y: hidden;
+  --mdc-grid-list-tile-width: 48%;
+}
+
+.mdc-grid-tile__secondary {
+  height: 96px;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-property: all;
+  transform: translateY(48px);
+}
+
+.mdc-grid-tile__secondary:hover {
+  transform: translateY(0px);
+}
+
+.mdc-grid-tile__secondary:focus {
+  transform: translateY(0px);
 }
 
 @media (min-width: 450px) {
   .mdc-grid-tile {
-    --mdc-grid-list-tile-width: 33.33%;
+    --mdc-grid-list-tile-width: 32.33%;
   }
 }
 
 @media (min-width: 770px) {
   .mdc-grid-tile {
-    --mdc-grid-list-tile-width: 25%;
+    --mdc-grid-list-tile-width: 24%;
   }
 }
 
 @media (min-width: 1030px) {
   .mdc-grid-tile {
-    --mdc-grid-list-tile-width: 20%;
+    --mdc-grid-list-tile-width: 19%;
   }
 }
 
 @media (min-width: 1440px) {
   .mdc-grid-tile {
-    --mdc-grid-list-tile-width: 10%;
+    --mdc-grid-list-tile-width: 9%;
   }
 }

@@ -26,12 +26,25 @@ async function getUser() {
 
 function getRepoTemplate(repo: Repo) {
   return html`
-    <li class="mdc-grid-tile" data-repo-url="${repo.html_url}">
+    <li class="mdc-grid-tile">
       <div class="mdc-grid-tile__primary">
         <img class="mdc-grid-tile__primary-content" src="images/${repo.language}.png" />
       </div>
-      <span class="mdc-grid-tile__secondary">
+      <span class="mdc-grid-tile__secondary" data-repo-url="${repo.html_url}">
         <span class="mdc-grid-tile__title">${repo.name}</span>
+        <br />
+        <button
+          class="mdc-button mdc-button--dense" style="--mdc-theme-primary: white"
+          data-repo-url="${repo.html_url}">
+          Repo
+        </button>
+        ${repo.homepage ?
+          html`<button
+            class="mdc-button mdc-button--outlined mdc-button--dense"
+            style="--mdc-theme-primary: white; padding: 0px 10px 0px 10px;"
+            data-repo-url="${repo.homepage}">
+            Homepage
+          </button>` : ''}
       </span>
     </li>
   `;
@@ -43,28 +56,43 @@ function buildReposTemplate(repos: Repo[]) {
   `;
 }
 
+function determineRepoUrl(element: Element | null): string {
+  if (element) {
+    const repoUrl = element.getAttribute('data-repo-url');
+    if (repoUrl) {
+      return repoUrl;
+    } else {
+      return determineRepoUrl(element.parentElement);
+    }
+  } else {
+    return '';
+  }
+}
+
+function tileClickListener(tile: Element) {
+  tile.addEventListener('click', (event: any) => {
+    window.open(
+      determineRepoUrl(event.target),
+      '_blank'
+    );
+  });
+
+  window.onbeforeunload = () => {
+    tile.removeEventListener('click', (event: any) => {
+      window.open(
+        determineRepoUrl(event.target),
+        '_blank'
+      );
+    });
+  };
+}
+
 function setUpRepos(repos: Repo[]) {
   const reposElement = document.querySelector('#github-repos') as Element;
 
   requestAnimationFrame(() => {
     render(buildReposTemplate(repos), reposElement);
-    Array.from(document.querySelectorAll('.mdc-grid-tile')).map((tile: Element) => {
-      tile.addEventListener('click', (event: any) => {
-        window.open(
-          event.target.parentElement.parentElement.getAttribute('data-repo-url'),
-          '_blank'
-        );
-      });
-
-      window.onbeforeunload = () => {
-        tile.removeEventListener('click', (event: any) => {
-          window.open(
-            event.target.parentElement.parentElement.getAttribute('data-repo-url'),
-            '_blank'
-          );
-        });
-      };
-    });
+    Array.from(document.querySelectorAll('.mdc-grid-tile__secondary')).map(tileClickListener);
   });
 }
 
@@ -114,6 +142,7 @@ function setUpTabClickListeners() {
     tabs.map(tab => {
       tab.addEventListener('click', (event: any) => {
         const button = event.target.parentElement as HTMLButtonElement;
+        const stateName = button.getAttribute(stateAttribute);
         const tabIndicator = button.querySelector('.mdc-tab-indicator');
         const unselectedTab = tabs.find(t => t !== button);
         if (tabIndicator) {
@@ -124,7 +153,7 @@ function setUpTabClickListeners() {
         }
         button.classList.add(activeClass);
         document
-          .querySelector(`.${button.getAttribute(stateAttribute)}`)!
+          .querySelector(`.${stateName}`)!
           .classList.remove('hidden');
 
         if (unselectedTab) {
@@ -133,6 +162,10 @@ function setUpTabClickListeners() {
           if (unselectedState) {
             document.querySelector(`.${unselectedState}`)!.classList.add('hidden');
           }
+        }
+
+        if (stateName) {
+          window.location.hash = stateName;
         }
       });
     });
@@ -172,7 +205,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (tabIndicator) {
       tabIndicator.classList.add(activeTabIndicator);
-
     }
   }
 });
