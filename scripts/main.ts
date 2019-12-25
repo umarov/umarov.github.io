@@ -5,6 +5,7 @@ import { MDCTabBar } from '@material/tab-bar/index';
 import { MDCTopAppBar } from '@material/top-app-bar/index';
 import { Repo } from './types/repo.type';
 import { User } from './types/user.type';
+
 const USER_NAME = 'umarov';
 const REPOS_URL = `https://api.github.com/users/${USER_NAME}/repos`;
 const USER_URL = `https://api.github.com/users/${USER_NAME}`;
@@ -28,7 +29,11 @@ function getRepoTemplate(repo: Repo) {
   return html`
     <li class="mdc-grid-tile">
       <div class="mdc-grid-tile__primary">
-        <img class="mdc-grid-tile__primary-content" src="images/${repo.language}.png" />
+        ${repo.language ?
+          html`<img class="mdc-grid-tile__primary-content" src="images/${repo.language}.png" />` :
+          html`
+            <h3>${repo.name}</h3>
+          `}
       </div>
       <span class="mdc-grid-tile__secondary" data-repo-url="${repo.html_url}">
         <span class="mdc-grid-tile__title">${repo.name}</span>
@@ -173,6 +178,7 @@ function setUpTabClickListeners() {
 }
 
 setUpTabClickListeners();
+
 getData().then(([repos, user]) => {
   setUpUser(user);
   setUpRepos(repos);
