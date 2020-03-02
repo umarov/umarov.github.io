@@ -3,8 +3,10 @@ import './styles';
 
 import { MDCTabBar } from '@material/tab-bar/index';
 import { MDCTopAppBar } from '@material/top-app-bar/index';
+import './repo-grid-tile';
 import { Repo } from './types/repo.type';
 import { User } from './types/user.type';
+import './user-profile';
 
 const USER_NAME = 'umarov';
 const REPOS_URL = `https://api.github.com/users/${USER_NAME}/repos`;
@@ -25,71 +27,22 @@ async function getUser() {
   return user;
 }
 
-function getRepoTemplate(repo: Repo) {
-  return html`
-    <li class="mdc-grid-tile">
-      <div class="mdc-grid-tile__primary">
-        ${repo.language ?
-          html`<img class="mdc-grid-tile__primary-content" src="images/${repo.language}.png" />` :
-          html`
-            <h3>${repo.name}</h3>
-          `}
-      </div>
-      <span class="mdc-grid-tile__secondary" data-repo-url="${repo.html_url}">
-        <span class="mdc-grid-tile__title">${repo.name}</span>
-        <br />
-        <button
-          class="mdc-button mdc-button--dense" style="--mdc-theme-primary: white"
-          data-repo-url="${repo.html_url}">
-          Repo
-        </button>
-        ${repo.homepage ?
-          html`<button
-            class="mdc-button mdc-button--outlined mdc-button--dense"
-            style="--mdc-theme-primary: white; padding: 0px 10px 0px 10px;"
-            data-repo-url="${repo.homepage}">
-            Homepage
-          </button>` : ''}
-      </span>
-    </li>
-  `;
-}
-
 function buildReposTemplate(repos: Repo[]) {
   return html`
-    ${repos.map(getRepoTemplate)}
-  `;
-}
-
-function determineRepoUrl(element: Element | null): string {
-  if (element) {
-    const repoUrl = element.getAttribute('data-repo-url');
-    if (repoUrl) {
-      return repoUrl;
-    } else {
-      return determineRepoUrl(element.parentElement);
+    ${
+      repos.map(
+        repo => html`
+          <repo-grid-tile
+            class="mdc-grid-tile"
+            language="${repo.language || ''}"
+            name="${repo.name}"
+            html-url="${repo.html_url}"
+            homepage="${repo.homepage || ''}"
+          />
+        `
+      )
     }
-  } else {
-    return '';
-  }
-}
-
-function tileClickListener(tile: Element) {
-  tile.addEventListener('click', (event: any) => {
-    window.open(
-      determineRepoUrl(event.target),
-      '_blank'
-    );
-  });
-
-  window.onbeforeunload = () => {
-    tile.removeEventListener('click', (event: any) => {
-      window.open(
-        determineRepoUrl(event.target),
-        '_blank'
-      );
-    });
-  };
+  `;
 }
 
 function setUpRepos(repos: Repo[]) {
@@ -97,7 +50,6 @@ function setUpRepos(repos: Repo[]) {
 
   requestAnimationFrame(() => {
     render(buildReposTemplate(repos), reposElement);
-    Array.from(document.querySelectorAll('.mdc-grid-tile__secondary')).map(tileClickListener);
   });
 }
 
@@ -105,29 +57,15 @@ function setUpUser(user: User) {
   const profileElement = document.querySelector('#profile') as Element;
   render(
     html`
-      <div class="mdc-card user-profile">
-        <img class="mdc-card__media-item mdc-card__media-item" src="${user.avatar_url}" />
-        <section class="mdc-card__primary user-card">
-          <h2 class="mdc-card__title mdc-card__title--large mdc-typography--headline6">
-            ${user.name}
-          </h2>
-          <h3 class="mdc-card__title mdc-typography--subtitle2">
-            ${user.company}, ${user.location}
-          </h3>
-          <p class="mdc-card__subtitle mdc-typography--body2">
-            since ${new Date(user.created_at).getFullYear()}
-          </p>
-        </section>
-        <section class="mdc-card__supporting-text">${user.bio}</section>
-        <section class="mdc-card__actions">
-          <button
-            class="mdc-button mdc-card__action mdc-card__action--button"
-            onclick="window.open('${user.html_url}', '_blank');"
-          >
-            Go to github.com profile
-          </button>
-        </section>
-      </div>
+      <user-profile
+        avatar-url="${user.avatar_url}"
+        name="${user.name}"
+        company="${user.company}"
+        location="${user.location}"
+        created-at="${user.created_at}"
+        bio="${user.bio || ''}"
+        html-url="${user.html_url}"
+      />
     `,
     profileElement
   );
