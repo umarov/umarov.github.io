@@ -24,7 +24,6 @@
   "dependencies": {
     "@material/button": "^6.0.0",
     "@material/card": "^6.0.0",
-    "@material/grid-list": "^4.0.0",
     "@material/list": "^6.0.0",
     "@material/tab-bar": "^6.0.0",
     "@material/top-app-bar": "^6.0.0",

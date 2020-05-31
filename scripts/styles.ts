@@ -2,7 +2,7 @@ import 'normalize.css/normalize.css';
 
 import '@material/button/dist/mdc.button.min.css';
 import '@material/card/dist/mdc.card.min.css';
-import '@material/grid-list/dist/mdc.grid-list.min.css';
+import '@material/list/dist/mdc.list.min.css';
 import '@material/typography/dist/mdc.typography.min.css';
 
 import '@material/tab-bar/dist/mdc.tab-bar.min.css';

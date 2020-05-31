@@ -3,4 +3,5 @@ export interface Repo {
   html_url: string;
   language: string;
   homepage: string;
+  description: string;
 }

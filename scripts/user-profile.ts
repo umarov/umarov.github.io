@@ -1,35 +1,46 @@
 import { customElement, html, LitElement, property, TemplateResult } from 'lit-element';
 
+import { User } from './types/user.type';
+
+const USER_NAME = 'umarov';
+const USER_URL = `https://api.github.com/users/${USER_NAME}`;
 @customElement('user-profile')
 export class UserProfile extends LitElement {
-  @property({ type: String, attribute: 'avatar-url' }) public avatarUrl = '';
-  @property({ type: String }) public name = '';
-  @property({ type: String }) public company = '';
-  @property({ type: String }) public location = '';
-  @property({ type: Date, attribute: 'created-at' }) public createdAt = new Date();
-  @property({ type: String }) public bio = '';
-  @property({ type: String, attribute: 'html-url' }) public htmlUrl = '';
+  @property({ type: Object }) private user: User = {
+    avatar_url: '',
+    bio: '',
+    company: '',
+    created_at: '',
+    html_url: '',
+    location: '',
+    name: ''
+  };
+
+  public connectedCallback(): void {
+    super.connectedCallback();
+    this.getUser()
+  }
 
   public render(): TemplateResult {
     return html`
       <div class="mdc-card user-profile">
-        <img class="mdc-card__media-item mdc-card__media-item" src="${this.avatarUrl}" />
+        <img class="mdc-card__media-item mdc-card__media-item" src="${this.user.avatar_url}" />
         <section class="mdc-card__primary user-card">
           <h2 class="mdc-card__title mdc-card__title--large mdc-typography--headline6">
-            ${this.name}
+            ${this.user.name}
           </h2>
           <h3 class="mdc-card__title mdc-typography--subtitle2">
-            ${this.company}, ${this.location}
+            ${this.user.company}, ${this.user.location}
           </h3>
           <p class="mdc-card__subtitle mdc-typography--body2">
-            since ${new Date(this.createdAt).getFullYear()}
+            since ${new Date(this.user.created_at).getFullYear()}
           </p>
         </section>
-        <section class="mdc-card__supporting-text">${this.bio}</section>
+        <section class="mdc-card__supporting-text">${this.user.bio}</section>
         <section class="mdc-card__actions">
           <button
             class="mdc-button mdc-card__action mdc-card__action--button"
-            onclick="window.open('${this.htmlUrl}', '_blank');"
+            onclick="window.open('${this.user.html_url}', '_blank');"
           >
             Go to github.com profile
           </button>
@@ -41,4 +52,11 @@ export class UserProfile extends LitElement {
   public createRenderRoot(): this {
     return this;
   }
+
+
+  async getUser(): Promise<void> {
+    const response = await fetch(USER_URL);
+    this.user = (await response.json()) as User;
+  }
+
 }

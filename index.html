@@ -17,61 +17,11 @@
         </section>
       </div>
     </header>
-    <div class="mdc-top-app-bar__row">
-      <div class="mdc-tab-bar" role="tablist">
-        <div class="mdc-tab-scroller">
-          <div class="mdc-tab-scroller__scroll-area">
-            <div class="mdc-tab-scroller__scroll-content">
-              <button
-                class="mdc-tab mdc-tab--active"
-                role="tab"
-                aria-selected="true"
-                tabindex="0"
-                data-state-name="profile"
-                href="#profile"
-              >
-                <span class="mdc-tab__content">
-                  <span class="mdc-tab__text-label">Profile</span>
-                </span>
-                <span class="mdc-tab-indicator">
-                  <span
-                    class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"
-                  ></span>
-                </span>
-                <span class="mdc-tab__ripple"></span>
-              </button>
-
-              <button
-                class="mdc-tab"
-                role="tab"
-                aria-selected="false"
-                tabindex="1"
-                data-state-name="repos"
-                href="#repos"
-              >
-                <span class="mdc-tab__content">
-                  <span class="mdc-tab__text-label">Repos</span>
-                </span>
-                <span class="mdc-tab-indicator">
-                  <span
-                    class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"
-                  ></span>
-                </span>
-                <span class="mdc-tab__ripple"></span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <main>
-      <div class="profile hidden" id="profile"></div>
+      <user-profile class="profile" id="profile"></user-profile>
 
-      <div class="repos hidden">
-        <h2>Github repos</h2>
-        <div class="mdc-grid-list"><ul class="mdc-grid-list__tiles" id="github-repos"></ul></div>
-      </div>
+      <my-repos class="repos"></my-repos>
     </main>
 
     <script src="./dist/main.bundle.js"></script>
