@@ -1,11 +1,13 @@
-const path = require('path')
+const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: './scripts/main.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'script.bundle.js'
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].bundle.js',
+    publicPath: '/dist/'
   },
   resolve: {
     extensions: ['.ts', '.js']
@@ -19,10 +21,12 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [{
-          loader: MiniCssExtractPlugin.loader
-        },
-        "css-loader"]
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          'css-loader'
+        ]
       }
     ]
   },

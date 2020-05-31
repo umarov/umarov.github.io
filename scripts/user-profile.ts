@@ -1,4 +1,4 @@
-import { customElement, html, LitElement, property } from "lit-element";
+import { customElement, html, LitElement, property, TemplateResult } from 'lit-element';
 
 @customElement('user-profile')
 export class UserProfile extends LitElement {
@@ -10,7 +10,7 @@ export class UserProfile extends LitElement {
   @property({ type: String }) public bio = '';
   @property({ type: String, attribute: 'html-url' }) public htmlUrl = '';
 
-  public render() {
+  public render(): TemplateResult {
     return html`
       <div class="mdc-card user-profile">
         <img class="mdc-card__media-item mdc-card__media-item" src="${this.avatarUrl}" />
@@ -38,7 +38,7 @@ export class UserProfile extends LitElement {
     `;
   }
 
-  public createRenderRoot() {
+  public createRenderRoot(): this {
     return this;
   }
 }
