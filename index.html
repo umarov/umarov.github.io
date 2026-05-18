@@ -1,29 +1,86 @@
 <!DOCTYPE html>
-<html class="mdc-typography">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Muzafar Umarov's Github Page</title>
-    <link rel="stylesheet" href="./dist/main.css" />
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles/base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Muzafar Umarov — Software Engineer</title>
+    <meta
+      name="description"
+      content="Personal landing page for Muzafar Umarov — software engineer in Washington, DC. Featured open-source projects, links to GitHub and mumarov.com."
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://umarov.dev/" />
+    <meta property="og:title" content="Muzafar Umarov — Software Engineer" />
+    <meta
+      property="og:description"
+      content="Featured open-source projects and links for Muzafar Umarov, software engineer based in Washington, DC."
+    />
+    <meta
+      property="og:image"
+      content="https://avatars.githubusercontent.com/u/2321915?v=4"
+    />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Muzafar Umarov — Software Engineer" />
+    <meta
+      name="twitter:description"
+      content="Featured open-source projects and links for Muzafar Umarov."
+    />
+    <meta
+      name="twitter:image"
+      content="https://avatars.githubusercontent.com/u/2321915?v=4"
+    />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body class="mdc-typography">
-    <header class="mdc-top-app-bar" style="position: relative;">
-      <div class="mdc-top-app-bar__row">
-        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-          <span class="mdc-top-app-bar__title">Muzafar Umarov's Github page</span>
-        </section>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="site-brand" href="/">Muzafar Umarov</a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="https://mumarov.com" target="_blank" rel="noopener noreferrer">Personal site</a>
+          <a href="https://github.com/umarov" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/mumarov/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </nav>
       </div>
     </header>
 
-    <main>
-      <user-profile class="profile" id="profile"></user-profile>
+    <main id="main-content" class="layout">
+      <section class="intro">
+        <p class="intro__eyebrow">Software engineer · Washington, DC</p>
+        <h1 class="intro__title">Hi, I'm Muzafar.</h1>
+        <p class="intro__lead">
+          I build backends, developer tooling, and web experiences. This page
+          highlights a curated set of open-source projects — for the full story,
+          visit my
+          <a href="https://mumarov.com" target="_blank" rel="noopener noreferrer">personal site</a>.
+        </p>
+      </section>
 
-      <my-repos class="repos"></my-repos>
+      <div class="layout__grid">
+        <user-profile id="profile"></user-profile>
+        <my-repos class="repos"></my-repos>
+      </div>
     </main>
 
-    <script src="./dist/main.bundle.js"></script>
+    <footer class="site-footer">
+      <p>
+        © Muzafar Umarov ·
+        <a href="https://mumarov.com" target="_blank" rel="noopener noreferrer">mumarov.com</a>
+        ·
+        <a href="https://github.com/umarov" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </p>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
